@@ -1,8 +1,13 @@
 # Visualization
 
 ## でぃ～ぷら～にんぐとかにやくだつかしかつ～る
+じっそうかんきょーはanaconda3-4.2.0 (python3.5)  
+chainer:2.0.0  
+cupy:1.0.0   
+   
+
 ### GradCAM
-CNNの畳み込み層がどこに注目しているのかを可視化  
+CNNの畳み込み層がどこに注目しているのかを可視化(要chainer)  
 [https://qiita.com/nagayosi/items/14f243c058f5a1e7044b](https://github.com/tsurumeso/chainer-grad-cam)
 
 ### t-SNE
@@ -11,7 +16,7 @@ CNNの畳み込み層がどこに注目しているのかを可視化
 [https://github.com/dominiek/python-bhtsne](https://github.com/dominiek/python-bhtsne)
 
 ### featureMap
-ある畳み込み層の特徴マップをチャンネル数全て可視化(後で載せる)  
+ある畳み込み層の特徴マップをチャンネル数全て可視化(要chainer)(後で載せる)  
 [ChainerでCNNしたった - Qiita](https://qiita.com/nagayosi/items/14f243c058f5a1e7044b)
 
 ### Generate image by imageMapping.py
