@@ -16,8 +16,8 @@ xp = cuda.cupy if cuda.available else np
 """
 
 
-class VGG16(chainer.Chain):
-# class VGG16(chainer.link.Chain):
+# class VGG16(chainer.Chain):
+class VGG16(chainer.link.Chain):
     def __init__(self, class_num):
         super(VGG16, self).__init__()
         with self.init_scope():
