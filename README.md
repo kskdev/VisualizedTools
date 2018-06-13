@@ -24,10 +24,11 @@ CNNの畳み込み層がどこに注目しているのかを可視化 <br>
 
 
 ここに2種類の可視化結果を似せる予定
-### 生成結果の例
-Target data is [Office Dataset](https://people.eecs.berkeley.edu/~jhoffman/domainadapt/)
-
-<img src="https://github.com/kskdev/Visualization/blob/master/t-SNE/tSNE-office-white-small.png" width="640px">
+マッピングに利用したデータは[Office Dataset](https://people.eecs.berkeley.edu/~jhoffman/domainadapt/)を使用
+### 分布を店で表現した例
+<img src="https://github.com/kskdev/Visualization/blob/master/t-SNE/scatter.png" width="640px">
+### 分布を入力画像で表現した例
+<img src="https://github.com/kskdev/Visualization/blob/master/t-SNE/resizemap.png" width="640px">
 
 
 
