@@ -1,37 +1,12 @@
 # -*- coding: utf-8 -*-
 # python 3.5.2 with Anaconda3 4.2.0
-# coded by osmksk05
 
 import glob
 import numpy as np
 import cv2
 import bhtsne  # 'pip install bhtsne'
-import matplotlib as mpl
-import warnings
 
-mpl.use('Agg')
-warnings.filterwarnings("ignore")
-
-c_cycle = ("#1E88E5", "#43A047", "#e53935", "#FFB300", "#616161", "#5E35B1", "#F06292", "#795548")
-mpl.rc('font', size=10)
-mpl.rc('lines', linewidth=2, color="#2c3e50")
-mpl.rc('patch', linewidth=0, facecolor="none", edgecolor="none")
-mpl.rc('text', color='#2c3e50')
-mpl.rc('axes', facecolor='#ffffff', edgecolor="#111111", titlesize=15, labelsize=12, color_cycle=c_cycle, grid=False)
-mpl.rc('xtick.major', size=10, width=0)
-mpl.rc('ytick.major', size=10, width=0)
-mpl.rc('xtick.minor', size=10, width=0)
-mpl.rc('ytick.minor', size=10, width=0)
-mpl.rc('ytick', direction="out")
-mpl.rc('grid', color='#c0392b', alpha=0.5, linewidth=1)
-mpl.rc('legend', fontsize=15, markerscale=1, labelspacing=0.2, frameon=True, fancybox=True,
-       handlelength=0.1, handleheight=0.5, scatterpoints=1, facecolor="#eeeeee")
-mpl.rc('figure', figsize=(10, 6), dpi=128, facecolor="none", edgecolor="none")
-mpl.rc('savefig', dpi=128)
-
-
-def flatten(nested_list):
-    return [e for inner_list in nested_list for e in inner_list]
+from common import flatten, c_cycle
 
 
 def reshape_1dim(img_paths, size=(128, 128)):
@@ -74,9 +49,10 @@ def draw_image_with_tsne(lst, save_file="figure", resize=(128, 128), seed=-1):
 
 
 if __name__ == '__main__':
-    p1 = glob.glob("./domain_adaptation_images/amazon/images/*/*.jpg")
-    p2 = glob.glob("./domain_adaptation_images/dslr/images/*/*.jpg")
-    p3 = glob.glob("./domain_adaptation_images/webcam/images/*/*.jpg")
+    p1 = glob.glob("./Data1/*.png")
+    p2 = glob.glob("./Data2/*.png")
+    p3 = glob.glob("./Data3/*.png")
+    lst = [["Domain1", p1], ["Domain2", p2], ["Domain3", p3]]
+    save_name = "map.png"
 
-    domain_paths = [["Domain1", p1], ["Domain2", p2], ["Domain3", p3]]
-    draw_image_with_tsne(domain_paths, "tSNE.png", resize=(128, 128))
+    draw_image_with_tsne(lst, save_name, resize=(128, 128))
