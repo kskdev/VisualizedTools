@@ -8,7 +8,7 @@ import cv2
 import chainer  # v2
 import matplotlib as mpl
 
-import vgg16
+from featureMap import vgg16
 
 os.environ["PATH"] = "/usr/local/cuda-8.0/bin:/usr/bin:"
 mpl.use('Agg')

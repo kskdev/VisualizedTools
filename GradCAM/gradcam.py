@@ -100,7 +100,7 @@ class GuidedBackprop(BaseBackprop):
 class VisualizeMap:
     def __init__(self, class_num, gpu=-1):
         # create network object
-        import vgg16
+        from featureMap import vgg16
         self.model = vgg16.VGG16(class_num=class_num)
         print("--- Created network object ---")
         self.class_num = class_num
