@@ -6,7 +6,7 @@ import glob
 import numpy as np
 import bhtsne  # 'pip install bhtsne'
 
-from Common import flatten, c_cycle, FeatureExtractor
+from Common.common import flatten, c_cycle, FeatureExtractor
 
 
 def compress_to_2dim(np_mat, split_pos_list, seed=-1, perplexity=30.0):
@@ -30,9 +30,9 @@ def get_split_pos(file_len_list):
 
 
 if __name__ == '__main__':
-    class_num = 40
-    model_path = "chainer_model_file.npz"
-    gpu = 0
+    class_num = 1000
+    model_path = "../Common/VGG16.model"
+    gpu = -1
     layer = "fc8"
     size = (224, 224)
     save_name = "map.png"
@@ -41,11 +41,15 @@ if __name__ == '__main__':
     p2 = glob.glob("./Data2/*.png")
     p3 = glob.glob("./Data3/*.png")
     lst = [["Domain1", p1], ["Domain2", p2], ["Domain3", p3]]
+    print(all_path)
+    exit()
 
     # Create feature extractor
-    fe = FeatureExtractor(class_num=class_num, model_path=model_path, gpu=0)
+    from Common.vgg16 import VGG16
+    model = VGG16(class_num=class_num)
+    fe = FeatureExtractor(model, class_num, model_path, size, gpu)
 
-    all_path = flatten([p1, p2, p3])
+    all_path = flatten(lst[:][1])
     vec = list(map(lambda f: fe.get_flat_feat(f, layer), all_path))
 
     files_num = list(map(lambda f: len(f), [l for d, l in lst]))  # get file num each domain

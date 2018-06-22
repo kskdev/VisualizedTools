@@ -6,7 +6,7 @@ import numpy as np
 import cv2
 import bhtsne  # 'pip install bhtsne'
 
-from Common import flatten, c_cycle
+from Common.common import flatten, c_cycle
 
 
 def reshape_1dim(img_paths, size=(128, 128)):
@@ -15,10 +15,10 @@ def reshape_1dim(img_paths, size=(128, 128)):
     return np.asarray(lst, dtype=np.float64)  # shape:(image num, ch*W*H)
 
 
-def compress_to_2dim(vec, split_pos_list, seed=-1, perplexity=30.0):
-    vec = np.asarray(vec, dtype=np.float64)
-    vec = bhtsne.tsne(data=vec, dimensions=2, perplexity=perplexity, theta=0.5, rand_seed=seed)
-    return np.split(vec, split_pos_list, axis=0)
+def compress_to_2dim(np_mat, split_pos_list, seed=-1, perplexity=30.0):
+    np_mat = np.asarray(np_mat, dtype=np.float64)
+    np_mat = bhtsne.tsne(data=np_mat, dimensions=2, perplexity=perplexity, theta=0.5, rand_seed=seed)
+    return np.split(np_mat, split_pos_list, axis=0)
 
 
 def plot_vec(lst, save_file='figure'):
