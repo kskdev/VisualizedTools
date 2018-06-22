@@ -7,7 +7,7 @@ import bhtsne
 import numpy as np
 from PIL import Image
 
-from common import flatten, hex_to_rgb, c_cycle, FeatureExtractor
+from Common import flatten, hex_to_rgb, c_cycle, FeatureExtractor
 
 
 def compress_from_path(lst, class_num, model_path, size, layer, seed=-1):

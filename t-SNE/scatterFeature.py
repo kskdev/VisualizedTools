@@ -6,7 +6,7 @@ import glob
 import numpy as np
 import bhtsne  # 'pip install bhtsne'
 
-from common import flatten, c_cycle, FeatureExtractor
+from Common import flatten, c_cycle, FeatureExtractor
 
 
 def compress_to_2dim(np_mat, split_pos_list, seed=-1, perplexity=30.0):

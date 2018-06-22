@@ -6,7 +6,7 @@ import numpy as np
 import cv2
 import bhtsne  # 'pip install bhtsne'
 
-from common import flatten, c_cycle
+from Common import flatten, c_cycle
 
 
 def reshape_1dim(img_paths, size=(128, 128)):

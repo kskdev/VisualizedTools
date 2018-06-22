@@ -1,18 +1,13 @@
 # coding:utf-8
 
 import os
-import warnings
 
 import numpy as np
 import cv2
 import chainer  # v2
 import matplotlib as mpl
 
-from featureMap import vgg16
-
 os.environ["PATH"] = "/usr/local/cuda-8.0/bin:/usr/bin:"
-mpl.use('Agg')
-warnings.filterwarnings("ignore")
 
 # --- matplotlib setting --- #
 c_cycle = ("#E51400", "#1BA1E2", "#339933", "#A200FF", "#E671B8", "#F09609", "#515151", "#A05000")
@@ -46,11 +41,11 @@ def hex_to_rgb(hex_code):
 
 
 class FeatureExtractor:
-    def __init__(self, class_num, model_path, size=(224, 224), gpu=-1):
+    def __init__(self, model_obj, class_num, model_path, size=(224, 224), gpu=-1):
         self.class_num = class_num
         self.size = size
 
-        self.model = vgg16.VGG16(class_num=self.class_num)
+        self.model = model_obj
         print("--- Created network object ---")
         chainer.serializers.load_npz(model_path, self.model)
         print("--- Load network parameter ---")
@@ -60,6 +55,11 @@ class FeatureExtractor:
             self.model.to_gpu()
 
     # 画像の読み込み処理
+    def get_raw_img(self, img_path):
+        src = cv2.imread(img_path, cv2.IMREAD_COLOR)
+        src = cv2.resize(src, self.size, interpolation=cv2.INTER_LINEAR)
+        return src
+
     # (読み込み方法は各学習環境の入力方法に合わせた方が良い)
     def get_img(self, img_path):
         src = cv2.imread(img_path, cv2.IMREAD_COLOR)
@@ -80,10 +80,27 @@ class FeatureExtractor:
         feat = self.get_feat(x, layer)
         return np.ravel(feat)
 
-    def get_top1_label(self, img_path):
-        img_array = self.get_img(img_path)
+    # TODO 必要かどうかわからん ほりゅー
+    def show_top_n_label(self, img_path, head=5):
         with chainer.using_config('train', False):
-            acts = self.model.extract(img_array, layers=['prob'])
-        pred = chainer.cuda.to_cpu(acts['prob'].data[0])
-        label = np.argmax(pred)
-        return label
+            acts = self.model.extract(img_path, layers=['prob', 'prob'])
+        data = chainer.cuda.to_cpu(acts['prob'].data[0])
+        top_n_indx = np.argsort(data)[::-1][:head]
+        top_n_prob = np.sort(data)[::-1][:head]
+        for n, (i, p) in enumerate(zip(top_n_indx, top_n_prob)):
+            print("TOP{} | ClassID:{:>3} | Prob:{}".format(n + 1, i, p))
+
+
+if __name__ == '__main__':
+    # for test
+
+    from Common import vgg16
+
+    model = vgg16.VGG16(class_num=1000)
+    fe = FeatureExtractor(model, 1000, './VGG16.model', (224, 224), 0)
+
+    img_path = 'input.jpg'
+    raw_img = fe.get_raw_img(img_path)
+    input_img = fe.get_img(img_path)
+    feature = fe.get_feat(input_img, 'conv1_1')
+    fe.show_top_n_label(img_path, head=10)

@@ -7,7 +7,7 @@ import numpy as np
 from PIL import Image
 import bhtsne
 
-from common import flatten, hex_to_rgb, c_cycle
+from Common import flatten, hex_to_rgb, c_cycle
 
 
 def compress_from_path(lst, resize=(64, 64), seed=-1):
