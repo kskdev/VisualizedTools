@@ -1,12 +1,13 @@
 # Visualization Kit for Deep Learning
+まだ工事中...
 
 Deep Learningの分析・可視化とかに利用できるツールをまとめるレポジトリにする予定 <br>
 ネットワーク定義ファイルと保存したモデルファイルを用いて色々な可視化・分析するgitにしたい
 
 ## Environment
-Anaconda3-4.2.0 (python3.5.2)
-chainer:2.0.0
-cupy:1.0.0
+Anaconda3-4.2.0 (python3.5.2) <br>
+chainer:2.0.0 <br>
+cupy:1.0.0 <br>
 
 
 ## Grad-CAM
@@ -60,6 +61,5 @@ etc
 
 VGG16モデルが無ければCommon/vgg16.py を実行すればモデルファイルが手に入る(ホント？？)
 
-まだまだ工事中(特にt-SNE)
 
 

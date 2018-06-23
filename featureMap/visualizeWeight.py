@@ -5,7 +5,7 @@ import math
 
 import matplotlib.pyplot as plt
 
-from Common import common, vgg16
+from Common.common import FeatureExtractor
 
 
 if __name__ == '__main__':
@@ -17,14 +17,15 @@ if __name__ == '__main__':
     input_size = (224, 224)
     gpu = 0
 
-    model = vgg16.VGG16(class_num=class_num)
+    from Common.vgg16 import VGG16
+    model = VGG16(class_num=class_num)
 
-    fe = common.FeatureExtractor(model, class_num, model_path, input_size, gpu)
+    fe = FeatureExtractor(model, class_num, model_path, input_size, gpu)
     fe.get_top1_label(image_path)
     img = fe.get_img(image_path)
     feature = fe.get_feat(img_array=img, layer=target_layer)
 
-    batch, ch, h, w = feature.shape
+    batch, ch, w, h = feature.shape
     print(' layer shape : {}'.format(feature.shape))
     plt.figure(figsize=(15, 15))
     plt.subplots_adjust(left=0.001, right=0.999, top=0.999, bottom=0.001, hspace=0.01, wspace=0.01)

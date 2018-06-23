@@ -15,7 +15,7 @@ import chainer
 import chainer.functions as F
 from chainer import cuda, utils
 
-from Common import common
+from Common.common import FeatureExtractor
 
 os.environ["PATH"] = "/usr/local/cuda-8.0/bin:/usr/bin:"
 
@@ -110,12 +110,12 @@ if __name__ == '__main__':
     p.add_argument('--save_name', '-s', default='img_')
     args = p.parse_args()
 
-    from Common import vgg16
+    from Common.vgg16 import VGG16
 
-    model = vgg16.VGG16(class_num=args.class_num)
+    model = VGG16(class_num=args.class_num)
     size = (224, 224)
 
-    fe = common.FeatureExtractor(model, args.class_num, args.model_path, size, args.gpu)
+    fe = FeatureExtractor(model, args.class_num, args.model_path, size, args.gpu)
     raw_img = fe.get_raw_img(args.input)
     input_img = fe.get_img(args.input)
 
