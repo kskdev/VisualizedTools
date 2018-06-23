@@ -37,7 +37,7 @@ Grad-CAMはCAMと違い，任意のクラスのAttentionを可視化可能<br>
 
 ## Feature Map
 ある畳み込み層の特徴マップをチャンネル数全て可視化<br>
-```畳み込み層```だけに対応していることに注意
+畳み込み層 だけに対応していることに注意
 
 [ChainerでCNNしたった - Qiita](https://qiita.com/nagayosi/items/14f243c058f5a1e7044b)
 
@@ -49,6 +49,10 @@ Grad-CAMはCAMと違い，任意のクラスのAttentionを可視化可能<br>
 
 ### How to define Network
 いずれ書く (というか見ればなんとなくいけるはず)
+
+<!-- まず自前のネットワークを用意する．
+その後，Collection モジュールを用いてディクショナリを作成 -->
+
 
 ### 予定
 取り敢えずvgg16.pyを一つにする
