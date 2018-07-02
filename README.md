@@ -65,5 +65,5 @@ etc
 
 VGG16モデルが無ければCommon/vgg16.py を実行すればモデルファイルが手に入る(ホント？？)
 
-
+Confusion Matrixのコピペ可能なスクリプトも載せる
 
